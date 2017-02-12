@@ -97,7 +97,7 @@ func main() {
 		r.HandleFunc("/store/{collection}/{uuid}", h.Write).Methods(http.MethodPost)
 		r.HandleFunc("/store/__healthy", h.Ping).Methods(http.MethodGet)
 
-		setupTracing(r)
+		setupTracing()
 		srv := &http.Server{
 			ReadTimeout:  5 * time.Second,
 			WriteTimeout: 10 * time.Second,
@@ -117,7 +117,7 @@ func main() {
 	app.Run(os.Args)
 }
 
-func setupTracing(router *mux.Router) string {
+func setupTracing() string {
 	appdashPort := 8700
 
 	store := appdash.NewMemoryStore()
